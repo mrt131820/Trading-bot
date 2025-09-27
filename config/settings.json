@@ -1,0 +1,7 @@
+{
+  "index": "NIFTY",
+  "lot_qty": 1,
+  "strike_step": 50,
+  "sl_percent": 20,
+  "check_interval": 5
+}
