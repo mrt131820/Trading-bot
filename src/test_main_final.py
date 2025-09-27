@@ -13,7 +13,6 @@ Spec:
 
 import json, time, datetime, random, requests
 from typing import Dict, Optional, Tuple
-from refresh_token import refresh_access_token
 
 # ------------------ CONFIG / CREDS --------------------
 with open("config/credentials.json") as f:
@@ -33,8 +32,8 @@ HEADERS  = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/json", "C
 # -------- Strategy params ----------------------------
 STOPLOSS_PCT  = 21.0
 POLL_INTERVAL = 1 if MODE == "sandbox" else 5
-ENTRY_HH, ENTRY_MM = 10, 30        # 10:30 AM IST ✅
-EXIT_HH,  EXIT_MM  = 15, 25        # 15:20 IST ✅
+ENTRY_HH, ENTRY_MM = 17, 30        # 10:30 AM IST ✅
+EXIT_HH,  EXIT_MM  = 18, 25        # 15:20 IST ✅
 LOCK_STEP  = 5000                  # trail 5k for every +5k ✅
 LOCK_ARM   = 5000                  # arm at first +5k ✅
 NIFTY_INSTRUMENT_KEY = "NSE_INDEX|Nifty 50"
