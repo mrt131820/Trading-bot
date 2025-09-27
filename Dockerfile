@@ -8,5 +8,3 @@ COPY src/test_main_final.py .
 COPY config/ config/
 
 EXPOSE 8080
-
-CMD ["python", "test_main_final.py"]
