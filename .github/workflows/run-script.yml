@@ -26,3 +26,5 @@ jobs:
         run: python src/test_main_final.py
         env:
           TOKEN: ${{ secrets.TOKEN }}
+          MODE: production
+          
