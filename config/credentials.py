@@ -1,7 +1,7 @@
 import os
 
 credentials = {
-  "client_id": os.getenv("CLIENT_ID", "8cb0633f-db07-4d39-b36f-9b84115a1a2f"),
+  "client_id": os.getenv("CLIENT_ID", "xxxx"),
   "client_secret": os.getenv("CLIENT_SECRET"),
   "redirect_uri": os.getenv("REDIRECT_URI"),
   "refresh_token": os.getenv("REFRESH_TOKEN"),

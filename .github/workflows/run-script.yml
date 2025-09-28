@@ -28,4 +28,5 @@ jobs:
         run: python src/test_main_final.py
         env:
           TOKEN: ${{ secrets.SANDBOX_ACCESS_TOKEN }}
+          MODE: sandbox
           
