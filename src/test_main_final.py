@@ -35,7 +35,7 @@ POLL_INTERVAL = 1 if MODE == "sandbox" else 5
 ENTRY_HH, ENTRY_MM = 10, 30       # 10:30 AM IST ✅
 EXIT_HH,  EXIT_MM  = 15, 25      # 15:20 IST ✅
 LOCK_STEP  = 10000                  # trail 5k for every +5k ✅
-LOCK_ARM   = 100                  # arm at first +5k ✅
+LOCK_ARM   = 1000000                  # arm at first +5k ✅
 NIFTY_INSTRUMENT_KEY = "NSE_INDEX|Nifty 50"
 
 # Sandbox knobs
