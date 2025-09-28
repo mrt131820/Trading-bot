@@ -12,11 +12,13 @@ Spec:
 """
 
 import json, time, datetime, random, requests
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from config.credentials import credentials
 from typing import Dict, Optional, Tuple
 
 # ------------------ CONFIG / CREDS --------------------
-with open("config/credentials.json") as f:
-    cfg = json.load(f)
+cfg = credentials
 
 MODE   = cfg.get("mode", "production").lower()
 if MODE == "production":
@@ -34,8 +36,8 @@ STOPLOSS_PCT  = 21.0
 POLL_INTERVAL = 1 if MODE == "sandbox" else 5
 ENTRY_HH, ENTRY_MM = 10, 30       # 10:30 AM IST ✅
 EXIT_HH,  EXIT_MM  = 15, 25      # 15:20 IST ✅
-LOCK_STEP  = 10000                  # trail 5k for every +5k ✅
-LOCK_ARM   = 1000000                  # arm at first +5k ✅
+LOCK_STEP  = 5000                  # trail 5k for every +5k ✅
+LOCK_ARM   = 5000                  # arm at first +5k ✅
 NIFTY_INSTRUMENT_KEY = "NSE_INDEX|Nifty 50"
 
 # Sandbox knobs
