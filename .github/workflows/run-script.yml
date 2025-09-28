@@ -8,7 +8,7 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
-    environment: production
+    environment: sandbox
     
 
     steps:
@@ -27,6 +27,5 @@ jobs:
       - name: Run the Python script
         run: python src/test_main_final.py
         env:
-          TOKEN: ${{ secrets.TOKEN }}
-          MODE: sandbox
+          TOKEN: ${{ secrets.SANDBOX_ACCESS_TOKEN }}
           
