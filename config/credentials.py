@@ -11,5 +11,5 @@ credentials = {
   "sandbox_redirect_uri": os.getenv("SANDBOX_REDIRECT_URI"),
   "sandbox_code": os.getenv("SANDBOX_CODE"),
   "sandbox_access_token": os.getenv("SANDBOX_ACCESS_TOKEN"),
-  "mode": os.getenv("MODE", "sandbox")  # Change to "production" for live trading
+  "mode": os.getenv("MODE", "production")  # Change to "production" for live trading
 }
