@@ -6,6 +6,9 @@ credentials = {
   "redirect_uri": os.getenv("REDIRECT_URI"),
   "refresh_token": os.getenv("REFRESH_TOKEN"),
   "access_token": os.getenv("TOKEN"),
+
+  "access_token_buy": os.getenv("TOKEN_BUY"),
+  
   "sandbox_client_id": os.getenv("SANDBOX_CLIENT_ID"),
   "sandbox_client_secret": os.getenv("SANDBOX_CLIENT_SECRET"),
   "sandbox_redirect_uri": os.getenv("SANDBOX_REDIRECT_URI"),

@@ -2,31 +2,44 @@ name: Daily Python Script Runner
 
 on:
   schedule:
-    - cron: '50 4 * * 1-5'  # Runs only Monday-Friday at 10:15 AM IST
-  workflow_dispatch:       # Enables manual trigger
+    - cron: '50 4 * * 1-5'  # 10:20 AM IST
+  workflow_dispatch:
 
 jobs:
-  run-script:
+  short-straddle:
     runs-on: ubuntu-latest
     environment: production
-    
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # You can change to your required Python version
-
+          python-version: '3.10'
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt || true  # Optional, skip if no requirements.txt
-
-      - name: Run the Python script
+        run: pip install -r requirements.txt || true
+      - name: Run Short Straddle Bot
         run: python src/test_main_final.py
         env:
-          SANDBOX_ACCESS_TOKEN: ${{ secrets.SANDBOX_ACCESS_TOKEN }}
           TOKEN: ${{ secrets.TOKEN }}
-          
+          MODE: "production"
+          SANDBOX_ACCESS_TOKEN: ${{ secrets.SANDBOX_ACCESS_TOKEN }}
+
+  breakout-buy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: pip install -r requirements.txt || true
+      - name: Run Breakout Buy Bot
+        run: python src/breakout_buy.py
+        env:
+          TOKEN_BUY: ${{ secrets.TOKEN_BUY }}
+          SANDBOX_ACCESS_TOKEN: ${{ secrets.SANDBOX_ACCESS_TOKEN }}
+          MODE: "production"
