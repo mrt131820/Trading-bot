@@ -77,11 +77,32 @@ def safe_get(ltp_map: Dict[str,float], token: str) -> Optional[float]:
     print(f"[WARN] Token {token} not found in {list(ltp_map.keys())}")
     return None
 
+def is_holiday(date_obj):
+    """Return True if the given date is a trading holiday (market closed)."""
+    date_str = date_obj.isoformat()
+    url = f"{API_BASE}/v2/market/holidays?date={date_str}"
+    resp = requests.get(url, headers={"Accept": "application/json"})
+    if resp.status_code != 200:
+        return False
+    data = resp.json()
+    # If “data” list is non-empty, that means that date is a holiday
+    # (or special timing) according to Upstox API docs. :contentReference[oaicite:1]{index=1}
+    return bool(data.get("data"))
+
 def this_or_next_tuesday_date_iso():
-    """Return this Tuesday (today if Tuesday), else next Thursday. ✅"""
     today = now_ist().date()
-    days_ahead = (1 - today.weekday()) % 7   # Mon=0
-    return (today + datetime.timedelta(days=days_ahead)).isoformat()
+    days_ahead = (1 - today.weekday()) % 7
+    tuesday = today + datetime.timedelta(days=days_ahead)
+
+    if is_holiday(tuesday):
+        monday = tuesday - datetime.timedelta(days=1)
+        if is_holiday(monday):
+            print(f"[WARN] Both Monday {monday} and Tuesday {tuesday} are holidays. Returning Monday anyway.")
+        else:
+            print(f"[INFO] Tuesday {tuesday} is a holiday. Using Monday {monday} as expiry.")
+        return monday.isoformat()
+
+    return tuesday.isoformat()
 
 def round_nearest_50(x: float) -> int: 
     return int(round(x/50.0)*50)
@@ -258,7 +279,7 @@ def run_short_straddle(wait_for_entry=False):
             ce_entry = float((get_order_details(ce_oid).get("data") or {}).get("average_price", 0.0))
             pe_entry = float((get_order_details(pe_oid).get("data") or {}).get("average_price", 0.0))
         except:
-            ltp_map = get_ltp_for([ce, pe])
+            ltp_map = simulator.tick() if MODE == "sandbox" else get_ltp_for([ce, pe])
             ce_entry, pe_entry = safe_get(ltp_map, ce), safe_get(ltp_map, pe)
 
     print("CE entry:", ce_entry, "PE entry:", pe_entry)

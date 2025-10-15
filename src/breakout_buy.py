@@ -83,10 +83,33 @@ def safe_get(d:Dict[str,float], key:str)->Optional[float]:
 def round_nearest_50(x:float)->int:
     return int(round(x/50.0)*50)
 
+def is_holiday(date_obj):
+    """Return True if the given date is a trading holiday (market closed)."""
+    date_str = date_obj.isoformat()
+    url = f"{API_BASE}/v2/market/holidays?date={date_str}"
+    resp = requests.get(url, headers={"Accept": "application/json"})
+    if resp.status_code != 200:
+        return False
+    data = resp.json()
+    # If “data” list is non-empty, that means that date is a holiday
+    # (or special timing) according to Upstox API docs. :contentReference[oaicite:1]{index=1}
+    return bool(data.get("data"))
+
 def this_or_next_tuesday_date_iso():
     today = now_ist().date()
     days_ahead = (1 - today.weekday()) % 7
-    return (today + datetime.timedelta(days=days_ahead)).isoformat()
+    tuesday = today + datetime.timedelta(days=days_ahead)
+
+    if is_holiday(tuesday):
+        monday = tuesday - datetime.timedelta(days=1)
+        if is_holiday(monday):
+            print(f"[WARN] Both Monday {monday} and Tuesday {tuesday} are holidays. Returning Monday anyway.")
+        else:
+            print(f"[INFO] Tuesday {tuesday} is a holiday. Using Monday {monday} as expiry.")
+        return monday.isoformat()
+
+    return tuesday.isoformat()
+
 
 # ---------------- SL LOGIC ----------------
 def compute_initial_sl(entry: float) -> float:
@@ -224,6 +247,7 @@ def run_option_buy_strategy(wait_for_entry=True):
         if spot is None:
             raise SystemExit("Could not fetch NIFTY spot in production mode.")
         chain = get_option_chain(expiry_iso)
+        print(f"[INFO] Fetched option chain for expiry {expiry_iso}: {chain}")
         atm = round_nearest_50(spot)
         ce = pe = None
         lot = None
