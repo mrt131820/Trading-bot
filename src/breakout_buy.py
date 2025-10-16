@@ -12,6 +12,7 @@ Behavior:
 
 import json
 import os, sys, time, datetime, random, requests
+from turtle import st
 from typing import Dict, Optional, Tuple
 
 # If you keep credentials as a module, adjust import path accordingly
@@ -347,6 +348,7 @@ def run_option_buy_strategy(wait_for_entry=True):
                         st["open"] = True
                         st["entry"] = trig
                         st["sl_trigger"] = compute_initial_sl(trig)
+                        st["buy_order_id"] = None
                         print(f"[SIM FILL] {leg} filled at {trig} | SL={st['sl_trigger']}")
                         # place SL sell
                         resp = place_order(st["token"], "SELL", qty, "SL", "D", trigger_price=st["sl_trigger"])
@@ -374,6 +376,7 @@ def run_option_buy_strategy(wait_for_entry=True):
                             st["open"] = True
                             st["entry"] = fill_price
                             st["sl_trigger"] = compute_initial_sl(fill_price)
+                            st["buy_order_id"] = None
                             print(f"[FILL] {leg} filled at {fill_price} | SL={st['sl_trigger']}")
                             # place SL sell (SELL SL-L)
                             resp = place_order(st["token"], "SELL", qty, "SL", "D", trigger_price=st["sl_trigger"])
