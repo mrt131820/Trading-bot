@@ -335,6 +335,7 @@ def run_option_buy_strategy(wait_for_entry=True):
 
         ce_ltp = safe_get(ltp_map, ce)
         pe_ltp = safe_get(ltp_map, pe)
+        print(f"[LTP] CE={ce_ltp} (trig {ce_trig}) | PE={pe_ltp} (trig {pe_trig})")
 
         # iterate legs
         for leg, ltp, trig in (("CE", ce_ltp, ce_trig), ("PE", pe_ltp, pe_trig)):
