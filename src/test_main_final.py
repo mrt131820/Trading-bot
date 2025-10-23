@@ -82,12 +82,26 @@ def is_holiday(date_obj):
     date_str = date_obj.isoformat()
     url = f"{API_BASE}/v2/market/holidays?date={date_str}"
     resp = requests.get(url, headers={"Accept": "application/json"})
+    
     if resp.status_code != 200:
+        print(f"[ERROR] Holiday API call failed with status {resp.status_code}")
         return False
+
     data = resp.json()
-    # If “data” list is non-empty, that means that date is a holiday
-    # (or special timing) according to Upstox API docs. :contentReference[oaicite:1]{index=1}
-    return bool(data.get("data"))
+    holidays = data.get("data", [])
+    print(f"[INFO] Holiday check for {date_str}: {len(holidays)} entries")
+
+    # Check for this specific date and TRADING_HOLIDAY type
+    for entry in holidays:
+        if entry.get("date") == date_str and entry.get("holiday_type") == "TRADING_HOLIDAY":
+            desc = entry.get("description", "Unknown")
+            print(f"[INFO] {date_str} is a TRADING HOLIDAY ({desc})")
+            return True
+
+    # Not a trading holiday
+    print(f"[INFO] {date_str} is NOT a trading holiday.")
+    return False
+
 
 def this_or_next_tuesday_date_iso():
     today = now_ist().date()
