@@ -42,7 +42,7 @@ STEP_UP_PCT = 30.0
 TRAIL_INC_PCT = 15.0    # 15% of initial SL per step (kept as requested)
 ENTRY_HH, ENTRY_MM = 10, 30
 EXIT_HH, EXIT_MM = 14, 30
-POLL_INTERVAL = 5
+POLL_INTERVAL = 1
 NIFTY_INSTRUMENT_KEY = "NSE_INDEX|Nifty 50"
 QTY = 300
 

@@ -33,7 +33,7 @@ HEADERS  = {"Authorization": f"Bearer {TOKEN}", "Accept": "application/json", "C
 
 # -------- Strategy params ----------------------------
 STOPLOSS_PCT  = 21.0
-POLL_INTERVAL = 1 if MODE == "sandbox" else 5
+POLL_INTERVAL = 1 if MODE == "sandbox" else 1
 ENTRY_HH, ENTRY_MM = 10, 30       # 10:30 AM IST ✅
 EXIT_HH,  EXIT_MM  = 15, 25      # 15:20 IST ✅
 LOCK_STEP  = 5000                  # trail 5k for every +5k ✅
@@ -124,7 +124,7 @@ def round_nearest_50(x: float) -> int:
 def compute_sl_price_for_sold(entry: float, pct: float) -> float:
     today = datetime.date.today().weekday()  # Monday=0, Tuesday=1, ...
     if today == 1:  # Tuesday
-        return round(entry + 30, 1)
+        return round(entry + 31, 1)
     else:
         return round(entry * (1 + pct / 100.0), 1)
 
