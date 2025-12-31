@@ -267,7 +267,7 @@ def run_short_straddle(wait_for_entry=False):
             raise SystemExit(f"No CE/PE tokens for {atm}")
 
     print("NIFTY spot:",spot); print("CE:",ce,"PE:",pe)
-    qty=int(lot)*4 if lot else 300
+    qty=int(lot)*4 if lot else 325
     print("Qty per leg:",qty)
 
     # Entry legs
