@@ -44,7 +44,7 @@ ENTRY_HH, ENTRY_MM = 10, 30
 EXIT_HH, EXIT_MM = 14, 30
 POLL_INTERVAL = 1
 NIFTY_INSTRUMENT_KEY = "NSE_INDEX|Nifty 50"
-QTY = 300
+QTY = 325
 
 # Optional behavior
 CANCEL_OPPOSITE_ON_FILL = False  # If True, cancel the other leg once one leg fills
