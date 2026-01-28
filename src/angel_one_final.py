@@ -15,7 +15,7 @@ MODE = "production"  # or "sandbox"
 
 STOPLOSS_PCT  = 21.0
 ENTRY_HH, ENTRY_MM = 10, 30
-EXIT_HH, EXIT_MM   = 18, 25
+EXIT_HH, EXIT_MM   = 15, 25
 
 LOCK_STEP = 1000
 LOCK_ARM  = 1000
