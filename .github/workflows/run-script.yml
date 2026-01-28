@@ -1,8 +1,8 @@
 name: Daily Python Script Runner
 
 on:
-  schedule:
-    - cron: '30 4 * * 1-5'  # 10:00 AM IST
+  # schedule:
+  #   - cron: '30 4 * * 1-5'  # 10:00 AM IST
   workflow_dispatch:
 
 jobs:
