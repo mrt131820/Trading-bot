@@ -1,0 +1,4 @@
+[W 260119 10:46:13 smartWebSocketV2:319] Attempting to resubscribe/reconnect (Attempt 1)...
+[W 260119 10:46:24 smartWebSocketV2:343] Connection closed due to max retry attempts reached.
+[W 260119 10:46:24 smartWebSocketV2:343] Connection closed due to max retry attempts reached.
+[W 260119 10:46:24 smartWebSocketV2:343] Connection closed due to max retry attempts reached.
