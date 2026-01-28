@@ -1,0 +1,6 @@
+REGISTER_SEARCH_URI 	= "http://find.smart-api.io/webapps/rs/v1.0e1.0/search"
+REGISTER_URI			= "http://find.smart-api.io/webapps/rs/v1.0e1.0/register"
+REGISTER_SHARING_URI	= "http://find.smart-api.io/webapps/rs/v1.0e1.0/sharing"
+REGISTER_KEY_URI		= "http://find.smart-api.io/webapps/rs/v1.0e1.0/key"
+TRANSACTION_URI			= "http://trade.smart-api.io/smartapi/v1.0e1.0/"
+KEYSERVER_URI           = "http://secure.smart-api.io:11371"
