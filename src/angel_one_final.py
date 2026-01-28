@@ -1,15 +1,15 @@
 from SmartApi import smartConnect, smartWebSocketV2
-import credentials_angel_one
+from config.credentials_angel_one import credentials
 from ws_manager import AngelWSManager
 import pyotp, time, datetime, random, json
 
 # =============================
 # USER CONFIGURATION
 # =============================
-API_KEY = credentials_angel_one.credentials["api_key"]
-CLIENT_CODE = credentials_angel_one.credentials["client_code"]
-PASSWORD = credentials_angel_one.credentials["password"]
-TOTP_SECRET = credentials_angel_one.credentials["totp_secret"]
+API_KEY = credentials["api_key"]
+CLIENT_CODE = credentials["client_code"]
+PASSWORD = credentials["password"]
+TOTP_SECRET = credentials["totp_secret"]
 
 MODE = "production"  # or "sandbox"
 
