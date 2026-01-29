@@ -1,7 +1,15 @@
 from SmartApi import smartConnect, smartWebSocketV2
 from config.credentials_angel_one import credentials
 from .ws_manager import AngelWSManager
-import pyotp, time, datetime, random, json
+import pyotp, time, datetime, pytz, json
+
+# =============================
+# TIMEZONE (MANDATORY FOR GITHUB ACTIONS)
+# =============================
+IST = pytz.timezone("Asia/Kolkata")
+
+def now_ist():
+    return datetime.datetime.now(IST)
 
 # =============================
 # USER CONFIGURATION
